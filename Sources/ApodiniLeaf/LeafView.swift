@@ -9,16 +9,16 @@ import LeafKit
 import Apodini
 
 public struct LeafView: ResponseTransformable {
-    @Environment(\.fileio) var fileio: NonBlockingFileIO
-    
     private let context: [String: LeafData]
     private let path: String
     private let information: [InformationKey: String]
+    private let fileio: NonBlockingFileIO
     
-    public init(_ path: String, _ context: [String: LeafData]?, information: [InformationKey: String]?) {
+    public init(_ path: String, _ context: [String: LeafData]?, information: [InformationKey: String]?, fileio: NonBlockingFileIO) {
         self.path = path
         self.context = context ?? [:]
         self.information = information ?? [:]
+        self.fileio = fileio
     }
     
     public func transformToResponse(on eventLoop: EventLoop) -> EventLoopFuture<Response<Raw>> {
