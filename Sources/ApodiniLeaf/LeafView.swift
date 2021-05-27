@@ -9,18 +9,22 @@ import LeafKit
 import Apodini
 
 public struct LeafView: ResponseTransformable {
+    @Environment(\.fileio) var fileio: NonBlockingFileIO
+    
     private let context: [String: LeafData]
     private let path: String
     private let information: [InformationKey: String]
     
-    public init(_ path: String, _ context: [String: LeafData], information: [InformationKey: String]?) {
-        self.context = context
+    public init(_ path: String, _ context: [String: LeafData]?, information: [InformationKey: String]?) {
         self.path = path
+        self.context = context ?? [:]
         self.information = information ?? [:]
     }
     
     public func transformToResponse(on eventLoop: EventLoop) -> EventLoopFuture<Response<Raw>> {
-        let renderer = LeafRenderer(configuration: LeafConfiguration(rootDirectory: "/Resources/Views/"), sources: LeafSources(), eventLoop: eventLoop)
+        let sources = LeafSources.singleSource(NIOLeafFiles(fileio: fileio))
+        
+        let renderer = LeafRenderer(configuration: LeafConfiguration(rootDirectory: "/Resources/Views/"), sources: sources, eventLoop: eventLoop)
         
         return renderer.render(path: path, context: context)
             .map { renderedHTML in
