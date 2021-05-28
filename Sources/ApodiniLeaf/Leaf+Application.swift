@@ -9,7 +9,7 @@ import Apodini
 import LeafKit
 
 extension Application {
-    var leafRenderer: LeafRenderer {
+    public var leafRenderer: LeafRenderer {
         let sources = LeafSources.singleSource(
             NIOLeafFiles(
                 fileio: self.fileio,
