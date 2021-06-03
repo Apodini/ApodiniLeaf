@@ -8,27 +8,19 @@
 import LeafKit
 import Apodini
 
-public struct LeafView<Context>: ResponseTransformable where Context: Encodable {
+public struct LeafStaticView: ResponseTransformable {
     private let path: String
     private let renderer: LeafRenderer
-    private let context: Context?
     private let information: [InformationKey: String]
     
-    public init(_ path: String, with renderer: LeafRenderer, context: Context? = nil, information: [InformationKey: String] = [:]) {
+    public init(_ path: String, with renderer: LeafRenderer, information: [InformationKey: String] = [:]) {
         self.path = path
-        self.context = context
         self.renderer = renderer
         self.information = information
     }
     
     public func transformToResponse(on eventLoop: EventLoop) -> EventLoopFuture<Response<Raw>> {
-        let data: [String: LeafData]
-        
-        do {
-            data = try LeafEncoder().encode(context)
-        } catch {
-            return renderer.eventLoop.makeFailedFuture(error)
-        }
+        let data: [String: LeafData] = [:]
         
         return renderer.render(path: path, context: data)
             .map { renderedHTML in
