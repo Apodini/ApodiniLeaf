@@ -15,12 +15,12 @@ extension Application {
             NIOLeafFiles(
                 fileio: self.fileio,
                 limits: .onlyLeafExtensions,
-                sandboxDirectory: Bundle.module.resourcePath! + "Views/",
-                viewDirectory: Bundle.module.resourcePath! + "Views/",
+                sandboxDirectory: Bundle.main.resourcePath! + "Views/",
+                viewDirectory: Bundle.main.resourcePath! + "Views/",
                 defaultExtension: "leaf"))
         
         return LeafRenderer(
-            configuration: LeafConfiguration(rootDirectory: Bundle.module.resourcePath! + "Views/"),
+            configuration: LeafConfiguration(rootDirectory: Bundle.main.resourcePath! + "Views/"),
             sources: sources,
             eventLoop: self.eventLoopGroup.next())
     }
