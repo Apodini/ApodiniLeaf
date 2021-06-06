@@ -7,6 +7,7 @@
 
 import Apodini
 import LeafKit
+import Foundation
 
 extension Application {
     public var leafRenderer: LeafRenderer {
