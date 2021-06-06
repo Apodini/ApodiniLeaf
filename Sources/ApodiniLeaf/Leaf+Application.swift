@@ -18,7 +18,7 @@ extension Application {
 public final class ApodiniLeafConfiguration: Configuration {
     let resourcePath: String
     
-    init(_ resourcePath: String) {
+    public init(_ resourcePath: String) {
         self.resourcePath = resourcePath
     }
     
