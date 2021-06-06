@@ -11,17 +11,35 @@ import Foundation
 
 extension Application {
     public var leafRenderer: LeafRenderer {
+        self.storage[LeafRendererStorageKey.self]!
+    }
+}
+
+public final class ApodiniLeafConfiguration: Configuration {
+    let resourcePath: String
+    
+    init(_ resourcePath: String) {
+        self.resourcePath = resourcePath
+    }
+    
+    public func configure(_ app: Application) {
         let sources = LeafSources.singleSource(
             NIOLeafFiles(
-                fileio: self.fileio,
+                fileio: app.fileio,
                 limits: .onlyLeafExtensions,
-                sandboxDirectory: Bundle.main.resourcePath! + "Views/",
-                viewDirectory: Bundle.main.resourcePath! + "Views/",
+                sandboxDirectory: resourcePath,
+                viewDirectory: resourcePath,
                 defaultExtension: "leaf"))
         
-        return LeafRenderer(
-            configuration: LeafConfiguration(rootDirectory: Bundle.main.resourcePath! + "Views/"),
+        let renderer = LeafRenderer(
+            configuration: LeafConfiguration(rootDirectory: resourcePath),
             sources: sources,
-            eventLoop: self.eventLoopGroup.next())
+            eventLoop: app.eventLoopGroup.next())
+        
+        app.storage[LeafRendererStorageKey.self] = renderer
     }
+}
+
+fileprivate struct LeafRendererStorageKey: StorageKey {
+    typealias Value = LeafRenderer
 }
