@@ -1,49 +1,99 @@
-## How to use this repository
-### Template
-When creating a new repository make sure to select this repository as a repository template. ![](https://github.com/Apodini/Template-Repository/raw/develop/Images/RepositoryTemplate.png)
+# Apodini Leaf
 
-### Customize the repository
-Enter your repository specific configuration
-- Enter your project name instead of "PROJECT_NAME" in .jazzy.yml
-- Remove the "Images" folder
-- Replace the "Package.swift", "Sources" and "Tests" folder with your own Swift Package
-- Update the README with your information
+Apodini Leaf is a small [Apodini](https://github.com/Apodini/Apodini) extension to support the [Leaf](https://github.com/vapor/leaf-kit) teamplating engine.
+The [Leaf documentation](https://docs.vapor.codes/4.0/leaf/overview/) provides a good overview of the usage of Leaf.
 
+## Integrate Swift Package
 
-### GitHub Actions
-This repository contains several workflows which require you to provide a GitHub Secret. Secrets are encrypted environment variables that you create in a repository for use with GitHub Actions.
-
-#### 1. Create a personal access token
-- Go to your token settings in GitHub (click on `Settings` in the user drop-down menu, then `Developer` settings in the sidebar, then click on `Personal access tokens`)
-- Then click the `Generate token` button.
-- Make sure to copy the access token
-
-![](https://github.com/Apodini/Template-Repository/raw/develop/Images/AccessToken.png)
-
-#### 2. Create a secret
-Next, you’ll need to add a new secret to your repository.
-
-- Open the settings for your repository and click `Secrets` in the sidebar
-- Click `Add a new secret` and set the name to `ACCESS_TOKEN`
-- Paste the copied personal access token into  `Value`
-- Click `Add secret`
-
-![](https://github.com/Apodini/Template-Repository/raw/release/Images/Secret.png)
-
-#### 3. Test all available GitHub Actions
-
-### ⬆️ Remove everything up to here ⬆️
-
-# Project Name
-
-## Requirements
-
-## Installation/Setup/Integration
+To use Apodini Leaf you have to add it as a depenency to your Swift Package in your Package.swift file. As Apodini Leaf is extending [Apodini](https://github.com/Apodini/Apodini) it is also currenlty using 0.X releases and every minor version number increment could include breaking changes. Therefore using `.upToNextMinor(from: "0.1.0")` is advised:
+```swift
+dependencies: [
+    .package(url: "https://github.com/Apodini/ApodiniLeaf.git", .upToNextMinor(from: "0.1.0")),
+    // More package dependencies ...
+]
+```
+Next add ApodiniLeaf as a target dependency to your web service target:
+```swift
+.target(
+    name: "MyWebService",
+    dependencies: [
+        .product(name: "Apodini", package: "Apodini"),
+        .product(name: "ApodiniLeaf", package: "ApodiniLeaf"),
+        // More target dependencies ...
+    ]
+)
+```
+Now you can import ApodiniLeaf in your web service:
+```swift
+import ApodiniLeaf
+```
 
 ## Usage
+
+To use ApodiniLeaf you have to define a `LeafConfiguration` in your `WebService` instance. You can pass in a `Bundle` or absolute path.
+In this example we have defined [Swift Package resources using the resources definition](https://developer.apple.com/documentation/swift_packages/bundling_resources_with_a_swift_package) in our Package.Swift file:
+```swift
+.testTarget(
+    name: "MyWebService",
+    dependencies: [
+        // ...
+    ],
+    resources: [
+        .process("Resources")
+    ]
+)
+```
+
+The folder structure looks like follows:
+```
+MyWebService
+├── Package.swift
+├── Resources
+│   ├── Examplee.leaf
+└── Sources
+    └── ...
+```
+
+The example Leaf file has the following content:
+```html
+<title>#(title)</title>
+<body>#(body)</body>
+```
+
+We use the `Bundle.module` to access the created resources bundle in the `WebService` configuration to configure the `LeafRenderer` as follows:
+```swift
+struct TestWebService: WebService {
+    var configuration: Configuration {
+        LeafConfiguration(Bundle.module)
+    }
+    
+    var content: some Component {
+        Text("Test")
+    }
+}
+```
+
+Now that we havee defined the configuration we can use the `LeafRenderer` in our Apodini `Handlers` using the `@Environment` property wrapper:
+```swift
+struct ExampleHandler: Handler {
+    @Environment(\.leafRenderer) var leafRenderer: LeafRenderer
+    
+    
+    func handle() -> some ResponseTransformable {
+        struct ExampleContent: Encodable {
+            let title: String
+            let body: String
+        }
+        
+        let content = ExampleContent(title: "Paul", body: "Hello!")
+        return leafRenderer.render(path: "Example", context: content)
+    }
+}
+```
+The `ExampleHandler` uses the `@Environment` property wrapper to retrieve the `LeafRenderer` and uses a Swift `struct` to fill in the content and renders the HTML using the `LeafRenderer`'s `render(path:context:)` method. For more information about Leaf please refer to the [Leaf documentation](https://docs.vapor.codes/4.0/leaf/overview/).
 
 ## Contributing
 Contributions to this projects are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/release/CONTRIBUTING.md) first.
 
 ## License
-This project is licensed under the MIT License. See [License](https://github.com/Apodini/Template-Repository/blob/release/LICENSE) for more information.
+This project is licensed under the MIT License. See [License](https://github.com/Apodini/ApodiniLeaf/blob/release/LICENSE) for more information.
