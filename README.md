@@ -30,7 +30,7 @@ import ApodiniLeaf
 
 ## Usage
 
-To use ApodiniLeaf you have to define a `LeafConfiguration` in your `WebService` instance. You can pass in a `Bundle` or absolute path.
+To use ApodiniLeaf, you have to define a `LeafConfiguration` in your `WebService` instance. You can pass in a `Bundle` or absolute path.
 In this example we have defined [Swift Package resources using the resources definition](https://developer.apple.com/documentation/swift_packages/bundling_resources_with_a_swift_package) in our Package.Swift file:
 ```swift
 .testTarget(
@@ -49,7 +49,7 @@ The folder structure looks like follows:
 MyWebService
 ├── Package.swift
 ├── Resources
-│   ├── Examplee.leaf
+│   ├── Example.leaf
 └── Sources
     └── ...
 ```
@@ -73,7 +73,7 @@ struct TestWebService: WebService {
 }
 ```
 
-Now that we havee defined the configuration we can use the `LeafRenderer` in our Apodini `Handlers` using the `@Environment` property wrapper:
+Now that we have defined the configuration, we can use the `LeafRenderer` in our Apodini `Handlers` using the `@Environment` property wrapper:
 ```swift
 struct ExampleHandler: Handler {
     @Environment(\.leafRenderer) var leafRenderer: LeafRenderer
@@ -90,10 +90,10 @@ struct ExampleHandler: Handler {
     }
 }
 ```
-The `ExampleHandler` uses the `@Environment` property wrapper to retrieve the `LeafRenderer` and uses a Swift `struct` to fill in the content and renders the HTML using the `LeafRenderer`'s `render(path:context:)` method. For more information about Leaf please refer to the [Leaf documentation](https://docs.vapor.codes/4.0/leaf/overview/).
+The `ExampleHandler` uses the `@Environment` property wrapper to retrieve the `LeafRenderer` and uses a Swift `struct` to fill in the content and renders the HTML using the `LeafRenderer`'s `render(path:context:)` method. For more information about Leaf, please refer to the [Leaf documentation](https://docs.vapor.codes/4.0/leaf/overview/).
 
 ## Contributing
-Contributions to this projects are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/release/CONTRIBUTING.md) first.
+Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/release/CONTRIBUTING.md) first.
 
 ## License
 This project is licensed under the MIT License. See [License](https://github.com/Apodini/ApodiniLeaf/blob/release/LICENSE) for more information.
