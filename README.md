@@ -1,5 +1,10 @@
 # Apodini Leaf
 
+[![DOI](https://zenodo.org/badge/371102138.svg)](https://zenodo.org/badge/latestdoi/371102138)
+[![codecov](https://codecov.io/gh/Apodini/ApodiniLeaf/branch/develop/graph/badge.svg?token=Rd38F6yTCC)](https://codecov.io/gh/Apodini/ApodiniLeaf)
+[![jazzy](https://raw.githubusercontent.com/Apodini/ApodiniLeaf/gh-pages/badge.svg)](https://apodini.github.io/ApodiniLeaf/)
+[![Build and Test](https://github.com/Apodini/ApodiniLeaf/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/Apodini/ApodiniLeaf/actions/workflows/build-and-test.yml)
+
 Apodini Leaf is a small [Apodini](https://github.com/Apodini/Apodini) extension to support the [Leaf](https://github.com/vapor/leaf-kit) teamplating engine.
 The [Leaf documentation](https://docs.vapor.codes/4.0/leaf/overview/) provides a good overview of the usage of Leaf.
 
@@ -93,7 +98,7 @@ struct ExampleHandler: Handler {
 The `ExampleHandler` uses the `@Environment` property wrapper to retrieve the `LeafRenderer` and uses a Swift `struct` to fill in the content and renders the HTML using the `LeafRenderer`'s `render(path:context:)` method. For more information about Leaf, please refer to the [Leaf documentation](https://docs.vapor.codes/4.0/leaf/overview/).
 
 ## Contributing
-Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/release/CONTRIBUTING.md) first.
+Contributions to this project are welcome. Please make sure to read the [contribution guidelines](https://github.com/Apodini/.github/blob/main/CONTRIBUTING.md) and the [contributor covenant code of conduct](https://github.com/Apodini/.github/blob/main/CODE_OF_CONDUCT.md) first.
 
 ## License
-This project is licensed under the MIT License. See [License](https://github.com/Apodini/ApodiniLeaf/blob/release/LICENSE) for more information.
+This project is licensed under the MIT License. See [License](https://github.com/Apodini/ApodiniLeaf/blob/develop/LICENSE) for more information.
