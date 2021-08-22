@@ -1,3 +1,11 @@
+//
+// This source file is part of the Apodini Leaf open source project
+//
+// SPDX-FileCopyrightText: 2021 Paul Schmiedmayer and the project authors (see CONTRIBUTORS.md) <paul.schmiedmayer@tum.de>
+//
+// SPDX-License-Identifier: MIT
+//
+
 @testable import Apodini
 @testable import ApodiniLeaf
 import XCTest
@@ -15,7 +23,7 @@ final class ApodiniLeafTests: XCTestCase {
             }
         }
         
-        let app = try TestWebService.start(waitForCompletion: false)
+        let app = try TestWebService.start(mode: .boot)
         let leafRenderer = app.leafRenderer
         
         

@@ -1,3 +1,13 @@
+<!--
+                  
+This source file is part of the Apodini Leaf open source project
+
+SPDX-FileCopyrightText: 2021 Paul Schmiedmayer and the project authors (see CONTRIBUTORS.md) <paul.schmiedmayer@tum.de>
+
+SPDX-License-Identifier: MIT
+             
+-->
+
 # Apodini Leaf
 
 [![DOI](https://zenodo.org/badge/371102138.svg)](https://zenodo.org/badge/latestdoi/371102138)
