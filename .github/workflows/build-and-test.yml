@@ -61,12 +61,6 @@ jobs:
     - name: Debug Build
       if: matrix.configuration == 'debug'
       run: swift build -c debug
-    - name: Test Generating Docs
-      if: matrix.configuration == 'debug'
-      run: |
-          xcodebuild docbuild -scheme ApodiniLeaf -destination platform=macOS,arch=x86_64 -derivedDataPath ./.xcodebuild
-          cp -r $(find ./.xcodebuild -type d -name 'ApodiniLeaf.doccarchive') ./ApodiniLeaf.doccarchive
-          echo "The DocC archive can be found at ./ApodiniLeaf.doccarchive"
   linux:
     name: Linux ${{ matrix.linux }} ${{ matrix.configuration }}
     container:
