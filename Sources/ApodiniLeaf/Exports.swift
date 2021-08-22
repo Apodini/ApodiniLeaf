@@ -1,4 +1,15 @@
-// This code is based on the Vapor project: https://github.com/vapor/leaf
+//
+// This source file is part of the Apodini Leaf open source project
+//
+// SPDX-FileCopyrightText: 2021 Paul Schmiedmayer and the project authors (see CONTRIBUTORS.md) <paul.schmiedmayer@tum.de>
+//
+// SPDX-License-Identifier: MIT
+//
+// This code is based on the Vapor project: https://github.com/vapor/leaf:
+//
+// SPDX-FileCopyrightText: 2018 Qutheory, LLC
+//
+// SPDX-License-Identifier: MIT
 //
 // The MIT License (MIT)
 //
