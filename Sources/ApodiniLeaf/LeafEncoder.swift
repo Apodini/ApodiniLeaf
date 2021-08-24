@@ -193,12 +193,12 @@ private final class KeyedContainer<Key: CodingKey>: KeyedEncodingContainerProtoc
     }
     
     /// See `KeyedEncodingContainerProtocol`
-    func superEncoder() -> Encoder {
+    func superEncoder() -> Encoder { // swiftlint:disable:this unavailable_function
         fatalError()
     }
     
     /// See `KeyedEncodingContainerProtocol`
-    func superEncoder(forKey key: Key) -> Encoder {
+    func superEncoder(forKey key: Key) -> Encoder { // swiftlint:disable:this unavailable_function
         fatalError()
     }
 }
@@ -254,7 +254,7 @@ private final class UnkeyedContainer: UnkeyedEncodingContainer, _Container {
     }
     
     /// See UnkeyedEncodingContainer.superEncoder
-    func superEncoder() -> Encoder {
+    func superEncoder() -> Encoder { // swiftlint:disable:this unavailable_function
         fatalError()
     }
 }
