@@ -21,8 +21,8 @@ let package = Package(
         .library(name: "ApodiniLeaf", targets: ["ApodiniLeaf"])
     ],
     dependencies: [
-        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.5.0")),
-        .package(url: "https://github.com/vapor/leaf-kit.git", from: "1.3.1")
+        .package(url: "https://github.com/Apodini/Apodini.git", .upToNextMinor(from: "0.6.1")),
+        .package(url: "https://github.com/vapor/leaf-kit.git", from: "1.4.0")
     ],
     targets: [
         .target(
